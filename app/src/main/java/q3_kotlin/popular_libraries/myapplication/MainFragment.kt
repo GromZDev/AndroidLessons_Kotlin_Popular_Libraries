@@ -26,21 +26,21 @@ class MainFragment : Fragment(), MainView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
-        }
-
-        binding.buttonOne.setOnClickListener(listener)
-        binding.buttonTwo.setOnClickListener(listener)
-        binding.buttonThree.setOnClickListener(listener)
+        binding.buttonOne.setOnClickListener { presenter.counterClickOne() }
+        binding.buttonTwo.setOnClickListener { presenter.counterClickTwo() }
+        binding.buttonThree.setOnClickListener { presenter.counterClickThree() }
     }
 
-    override fun setButtonText(index: Int, text: String) {
-        when (index) {
-            0 -> binding.buttonOne.text = text
-            1 -> binding.buttonTwo.text = text
-            2 -> binding.buttonThree.text = text
-        }
+    override fun setButtonTextOne(text: String) {
+        binding.buttonOne.text = text
+    }
+
+    override fun setButtonTextTwo(text: String) {
+        binding.buttonTwo.text = text
+    }
+
+    override fun setButtonTextThree(text: String) {
+        binding.buttonThree.text = text
     }
 
     override fun onDestroyView() {
