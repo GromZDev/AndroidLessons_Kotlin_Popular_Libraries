@@ -22,7 +22,7 @@ class UsersRVAdapter(private val presenter: IUserListPresenter) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         presenter.bindView(holder.apply { pos = position })
 
-    inner class ViewHolder(val vb: ItemUserRvBinding) :
+    inner class ViewHolder(private val vb: ItemUserRvBinding) :
         RecyclerView.ViewHolder(vb.root), UserItemView {
         override var pos = -1
         override fun setLogin(text: String) = with(vb) {
