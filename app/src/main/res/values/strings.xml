@@ -3,4 +3,5 @@
     <string name="counter1">Счетчик №1</string>
     <string name="counter2">Счетчик №2</string>
     <string name="counter3">Счетчик №3</string>
+    <string name="user_greeting">Приветствую тебя</string>
 </resources>
