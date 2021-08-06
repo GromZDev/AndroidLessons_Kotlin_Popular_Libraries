@@ -1,6 +1,7 @@
 package q3_kotlin.popular_libraries.myapplication.presenter
 
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
 import q3_kotlin.popular_libraries.myapplication.model.GithubUsersRepo
@@ -25,6 +26,9 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
 
     val usersListPresenter = UsersListPresenter()
 
+    /** Чтобы разом закрыть данные, на которые подписываемся: */
+    private val disposable = CompositeDisposable()
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
@@ -32,21 +36,33 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
     }
 
     private fun loadData() {
-        val users = usersRepo.getUsers()
 
-        usersListPresenter.users.addAll(users)
+        val users = usersRepo.getUsers()
+            .filter { it.lastIndex > 0 }
+            .subscribe {
+                usersListPresenter.users.addAll(it)
+                viewState.updateList()
+            }
+
+        disposable.add(users)
+
         usersListPresenter.itemClickListener = { itemView ->
 
-            /** переход на экран пользователя c помощью router.navigateTo */
-            router.navigateTo(UserScreen(users[itemView.pos]).create())
+            val currentUser = usersListPresenter.users[itemView.pos]
+            router.navigateTo(UserScreen(currentUser).create())
 
         }
-
-        viewState.updateList()
     }
 
     fun backPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    /** В OnDestroy закрываем всё, на что подписываемся, и прекращаем
+     * обработку данных из потока */
+    override fun onDestroy() {
+        disposable.dispose()
+        super.onDestroy()
     }
 }

@@ -1,5 +1,7 @@
 package q3_kotlin.popular_libraries.myapplication.model
 
+import io.reactivex.rxjava3.core.Observable
+
 class GithubUsersRepo {
 
     private val repositories = listOf(
@@ -21,7 +23,10 @@ class GithubUsersRepo {
         GithubUser("login16")
     )
 
-    fun getUsers(): List<GithubUser> {
-        return repositories
-    }
+    /***
+    Отдаем список пользователей через Callable, т.к. в реальности мы не
+    знаем этот список :
+     */
+    fun getUsers(): Observable<List<GithubUser>> =
+        Observable.fromCallable { repositories }
 }
