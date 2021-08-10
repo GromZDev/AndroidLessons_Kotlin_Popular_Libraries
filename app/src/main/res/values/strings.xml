@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="cancel">Отмена</string>
+    <string name="doConvert">Конвертировать</string>
+    <string name="in_progress">Осталось чуть-чуть… В процессе!</string>
+    <string name="on_success">УСПЕШНО!</string>
+    <string name="on_cancel">Отмена конвертации!</string>
+    <string name="on_error">Ошибка ((</string>
+    <string name="get_picture">Select Picture</string>
 </resources>
