@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentUserDetailsBinding
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
@@ -27,7 +28,12 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserView {
 
     private var vb: FragmentUserDetailsBinding? = null
 
-    private val userDetailsPresenter by moxyPresenter { UserDetailsPresenter(user) }
+    private val userDetailsPresenter by moxyPresenter {
+        UserDetailsPresenter(
+            App.instance.router,
+            user
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

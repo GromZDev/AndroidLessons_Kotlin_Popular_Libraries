@@ -1,15 +1,20 @@
 package q3_kotlin.popular_libraries.myapplication.presenter
 
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
 import q3_kotlin.popular_libraries.myapplication.model.GithubUsersRepo
+import q3_kotlin.popular_libraries.myapplication.model.IGithubUsersRepo
 import q3_kotlin.popular_libraries.myapplication.nav.UserScreen
 import q3_kotlin.popular_libraries.myapplication.view.UserItemView
 import q3_kotlin.popular_libraries.myapplication.view.UsersView
 
-class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router: Router) :
+class UsersPresenter(
+    val  uiScheduler: Scheduler,
+    private val usersRepo: IGithubUsersRepo,
+    private val router: Router) :
     MvpPresenter<UsersView>() {
 
     class UsersListPresenter : IUserListPresenter {
@@ -20,7 +25,7 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
 
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
-            view.setLogin(user.login)
+            user.login?.let { view.setLogin(it) }
         }
     }
 
@@ -38,11 +43,14 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
     private fun loadData() {
 
         val users = usersRepo.getUsers()
-            .filter { it.lastIndex > 0 }
-            .subscribe {
-                usersListPresenter.users.addAll(it)
+            .observeOn(uiScheduler)
+            .subscribe ({ repos ->
+                usersListPresenter.users.clear()
+                usersListPresenter.users.addAll(repos)
                 viewState.updateList()
-            }
+            }, {
+                println("Error: $(it.message)")
+        })
 
         disposable.add(users)
 
