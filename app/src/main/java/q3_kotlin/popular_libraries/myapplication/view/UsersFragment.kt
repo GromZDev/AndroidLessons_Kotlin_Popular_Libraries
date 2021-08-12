@@ -11,8 +11,8 @@ import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.BackButtonListener
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentUsersBinding
-import q3_kotlin.popular_libraries.myapplication.model.GithubUsersRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.UsersPresenter
+import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitGithubUsersRepo
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
@@ -47,7 +47,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun init() {
         vb?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter, GlideImageLoader())
         vb?.rvUsers?.adapter = adapter
     }
 

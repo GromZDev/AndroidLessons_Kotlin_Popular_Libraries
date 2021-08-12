@@ -5,16 +5,16 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
-import q3_kotlin.popular_libraries.myapplication.model.GithubUsersRepo
 import q3_kotlin.popular_libraries.myapplication.model.IGithubUsersRepo
 import q3_kotlin.popular_libraries.myapplication.nav.UserScreen
 import q3_kotlin.popular_libraries.myapplication.view.UserItemView
 import q3_kotlin.popular_libraries.myapplication.view.UsersView
 
 class UsersPresenter(
-    val  uiScheduler: Scheduler,
+    private val uiScheduler: Scheduler,
     private val usersRepo: IGithubUsersRepo,
-    private val router: Router) :
+    private val router: Router
+) :
     MvpPresenter<UsersView>() {
 
     class UsersListPresenter : IUserListPresenter {
@@ -26,6 +26,7 @@ class UsersPresenter(
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
             user.login?.let { view.setLogin(it) }
+            user.avatarUrl?.let { view.loadImage(it) }
         }
     }
 
@@ -44,13 +45,13 @@ class UsersPresenter(
 
         val users = usersRepo.getUsers()
             .observeOn(uiScheduler)
-            .subscribe ({ repos ->
+            .subscribe({ repos ->
                 usersListPresenter.users.clear()
                 usersListPresenter.users.addAll(repos)
                 viewState.updateList()
             }, {
                 println("Error: $(it.message)")
-        })
+            })
 
         disposable.add(users)
 
