@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
+import q3_kotlin.popular_libraries.myapplication.BackButtonListener
+import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentUserDetailsBinding
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
+import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
+import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitGithubSpecificUserRepo
 
 
-class UserDetailsFragment : MvpAppCompatFragment(), UserView {
+class UserDetailsFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
 
     companion object {
         private const val BUNDLE_EXTRA = "MY_GithubUser"
@@ -27,9 +33,12 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserView {
     }
 
     private var vb: FragmentUserDetailsBinding? = null
+    private var adapter: SpecificUserRVAdapter? = null
 
-    private val userDetailsPresenter by moxyPresenter {
+    private val userDetailsPresenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubSpecificUserRepo(ApiHolder.api),
             App.instance.router,
             user
         )
@@ -48,9 +57,34 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserView {
         vb = null
     }
 
-    override fun showUserLogin(user: GithubUser) {
-        vb?.userLogin?.text = user.login
+
+    override fun init() {
+        vb?.rvUsers?.layoutManager = LinearLayoutManager(context)
+        adapter = SpecificUserRVAdapter(
+            userDetailsPresenter.repositoriesListPresenter
+        )
+        vb?.rvUsers?.adapter = adapter
     }
 
+    override fun updateList() {
+        adapter?.notifyDataSetChanged()
+        vb?.reposCurrentCount?.text =
+            userDetailsPresenter.repositoriesListPresenter.repositories.size.toString()
+    }
+
+    override fun showUserInfo(user: GithubUser) {
+        vb?.userLogin?.text = user.login
+        val imageLoader = GlideImageLoader()
+        user.avatarUrl?.let {
+            vb?.userImage?.let { container ->
+                imageLoader.loadInto(
+                    it,
+                    container
+                )
+            }
+        }
+    }
+
+    override fun backPressed() = userDetailsPresenter.backPressed()
 
 }
