@@ -8,6 +8,9 @@ import q3_kotlin.popular_libraries.myapplication.model.GithubUser
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserView : MvpView {
 
-    fun showUserLogin(user: GithubUser)
+    fun init()
+    fun updateList()
+
+    fun showUserInfo(user: GithubUser)
 
 }

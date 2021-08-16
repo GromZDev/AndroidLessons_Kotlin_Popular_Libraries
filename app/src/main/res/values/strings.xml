@@ -4,4 +4,7 @@
     <string name="counter2">Счетчик №2</string>
     <string name="counter3">Счетчик №3</string>
     <string name="user_greeting">Приветствую тебя</string>
+    <string name="repo">Репозиторий:</string>
+    <string name="forks_count">Кол-во веток:</string>
+    <string name="repos_count">Кол-во репозиториев:</string>
 </resources>
