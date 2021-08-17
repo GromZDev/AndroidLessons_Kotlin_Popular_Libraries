@@ -3,6 +3,7 @@ package q3_kotlin.popular_libraries.myapplication
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import q3_kotlin.popular_libraries.myapplication.model.room.db.Database
 
 class App: Application() {
     companion object {
@@ -20,6 +21,10 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        Database.create(this)
+
+        /** Получаем всё, что хранится в БД*/
+       // Database.getInstance().repositoryDao.getAll()
     }
 
 }
