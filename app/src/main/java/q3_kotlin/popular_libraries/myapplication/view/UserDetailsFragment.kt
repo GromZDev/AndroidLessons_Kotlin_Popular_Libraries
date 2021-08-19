@@ -46,9 +46,10 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserView, BackButtonListener
                 AndroidNetworkStatus(App.instance),
                 RoomCurrentUserCache(Database.getInstance())
             ),
-            App.instance.router,
             user
-        )
+        ).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreateView(

@@ -31,9 +31,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
                 ApiHolder.api,
                 AndroidNetworkStatus(App.instance),
                 RoomUsersCache(Database.getInstance())
-            ),
-            App.instance.router
-        )
+            )
+
+        ).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private var adapter: UsersRVAdapter? = null
