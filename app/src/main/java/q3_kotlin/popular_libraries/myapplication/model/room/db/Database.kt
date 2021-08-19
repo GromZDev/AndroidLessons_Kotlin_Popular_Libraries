@@ -7,7 +7,6 @@ import q3_kotlin.popular_libraries.myapplication.model.dao.RepositoryDao
 import q3_kotlin.popular_libraries.myapplication.model.dao.UserDao
 import q3_kotlin.popular_libraries.myapplication.model.room.RoomGithubRepository
 import q3_kotlin.popular_libraries.myapplication.model.room.RoomGithubUser
-import java.lang.IllegalStateException
 
 @androidx.room.Database(
     entities = [
@@ -21,7 +20,7 @@ abstract class Database : RoomDatabase() {
     abstract val repositoryDao: RepositoryDao
 
     companion object {
-        private const val DB_NAME = "database.db"
+        const val DB_NAME = "database.db"
 
         private var instance: Database? = null
 

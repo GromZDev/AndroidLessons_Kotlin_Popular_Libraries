@@ -13,11 +13,11 @@ import javax.inject.Inject
 
 class UsersPresenter(
     private val uiScheduler: Scheduler,
-    private val usersRepo: IGithubUsersRepo
 ) :
     MvpPresenter<UsersView>() {
 
     @Inject lateinit var router: Router
+    @Inject lateinit var usersRepo: IGithubUsersRepo
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()

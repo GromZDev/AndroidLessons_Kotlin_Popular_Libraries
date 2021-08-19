@@ -3,6 +3,7 @@ package q3_kotlin.popular_libraries.myapplication
 import android.app.Application
 import q3_kotlin.popular_libraries.myapplication.dagger.AppComponent
 import q3_kotlin.popular_libraries.myapplication.dagger.DaggerAppComponent
+import q3_kotlin.popular_libraries.myapplication.dagger.module.AppModule
 import q3_kotlin.popular_libraries.myapplication.model.room.db.Database
 
 class App : Application() {
@@ -19,6 +20,7 @@ class App : Application() {
 
         /** Конструируем сам компонент главный: */
         appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
             .build()
     }
 

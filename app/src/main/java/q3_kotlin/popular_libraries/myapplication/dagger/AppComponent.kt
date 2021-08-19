@@ -1,7 +1,7 @@
 package q3_kotlin.popular_libraries.myapplication.dagger
 
 import dagger.Component
-import q3_kotlin.popular_libraries.myapplication.dagger.module.CiceroneModule
+import q3_kotlin.popular_libraries.myapplication.dagger.module.*
 import q3_kotlin.popular_libraries.myapplication.presenter.MainPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UsersPresenter
@@ -12,12 +12,18 @@ import q3_kotlin.popular_libraries.myapplication.view.MainActivity
 
 @Component(
     modules = [
-        CiceroneModule::class
+        AppModule::class,
+        CiceroneModule::class,
+        ApiModule::class,
+        NetworkStatusModule::class,
+        UsersRepoModule::class,
+        CacheModule::class,
+        DatabaseModule::class
     ]
 )
 interface AppComponent {
-
-    fun inject(usersPresenter: UsersPresenter) /** Куда будем делать inject */
+    /** Куда будем делать inject */
+    fun inject(usersPresenter: UsersPresenter)
     fun inject(mainPresenter: MainPresenter)
     fun inject(mainActivity: MainActivity)
     fun inject(userDetailsPresenter: UserDetailsPresenter)

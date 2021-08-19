@@ -9,14 +9,9 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.BackButtonListener
-import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentUsersBinding
-import q3_kotlin.popular_libraries.myapplication.model.room.AndroidNetworkStatus
-import q3_kotlin.popular_libraries.myapplication.model.room.cache.RoomUsersCache
-import q3_kotlin.popular_libraries.myapplication.model.room.db.Database
 import q3_kotlin.popular_libraries.myapplication.presenter.UsersPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitGithubUsersRepo
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
@@ -26,13 +21,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(
-                ApiHolder.api,
-                AndroidNetworkStatus(App.instance),
-                RoomUsersCache(Database.getInstance())
-            )
-
+            AndroidSchedulers.mainThread()
         ).apply {
             App.instance.appComponent.inject(this)
         }
