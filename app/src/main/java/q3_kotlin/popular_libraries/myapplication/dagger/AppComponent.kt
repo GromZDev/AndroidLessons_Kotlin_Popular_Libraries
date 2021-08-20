@@ -6,6 +6,8 @@ import q3_kotlin.popular_libraries.myapplication.presenter.MainPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UsersPresenter
 import q3_kotlin.popular_libraries.myapplication.view.MainActivity
+import q3_kotlin.popular_libraries.myapplication.view.SpecificUserRVAdapter
+import q3_kotlin.popular_libraries.myapplication.view.UsersRVAdapter
 
 /** Тут мы перечисляем все модули, которые будем использовать
  * в приложении и инжектить */
@@ -21,7 +23,8 @@ import q3_kotlin.popular_libraries.myapplication.view.MainActivity
         NetworkStatusModule::class,
         UsersRepoModule::class,
         CacheModule::class,
-        DatabaseModule::class
+        DatabaseModule::class,
+        ImageLoaderModule::class
     ]
 )
 interface AppComponent {
@@ -30,6 +33,5 @@ interface AppComponent {
     fun inject(mainPresenter: MainPresenter)
     fun inject(mainActivity: MainActivity)
     fun inject(userDetailsPresenter: UserDetailsPresenter)
-
-
+    fun inject(usersRVAdapter: UsersRVAdapter)
 }
