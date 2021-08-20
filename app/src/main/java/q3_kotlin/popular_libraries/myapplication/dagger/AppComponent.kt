@@ -10,6 +10,9 @@ import q3_kotlin.popular_libraries.myapplication.view.MainActivity
 /** Тут мы перечисляем все модули, которые будем использовать
  * в приложении и инжектить */
 
+@AppScope
+/** Все, что помечено AppScope, будет кэшироваться внутри appComponent.
+ * Также будет всё в единственном экземпляре */
 @Component(
     modules = [
         AppModule::class,

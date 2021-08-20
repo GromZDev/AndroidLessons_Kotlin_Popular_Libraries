@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import q3_kotlin.popular_libraries.myapplication.dagger.AppScope
 import q3_kotlin.popular_libraries.myapplication.retrofit.IDataSource
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiModule {
 
     /** Этот модуль необходим для реализации UsersRepoModule! */
+    @AppScope
     @Provides
     fun api(gson: Gson): IDataSource = Retrofit.Builder()
         .baseUrl("https://api.github.com")
@@ -22,6 +24,7 @@ class ApiModule {
         .build()
         .create(IDataSource::class.java)
 
+    @AppScope
     @Provides
     fun gson(): Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
