@@ -11,13 +11,17 @@ import q3_kotlin.popular_libraries.myapplication.view.UserItemView
 import q3_kotlin.popular_libraries.myapplication.view.UsersView
 import javax.inject.Inject
 
-class UsersPresenter(
-    private val uiScheduler: Scheduler,
-) :
+class UsersPresenter :
     MvpPresenter<UsersView>() {
 
-    @Inject lateinit var router: Router
-    @Inject lateinit var usersRepo: IGithubUsersRepo
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var usersRepo: IGithubUsersRepo
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()

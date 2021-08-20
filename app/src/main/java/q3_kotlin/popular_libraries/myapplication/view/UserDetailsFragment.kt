@@ -5,20 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.BackButtonListener
-import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentUserDetailsBinding
 import q3_kotlin.popular_libraries.myapplication.model.GithubUser
-import q3_kotlin.popular_libraries.myapplication.model.room.AndroidNetworkStatus
-import q3_kotlin.popular_libraries.myapplication.model.room.cache.RoomCurrentUserCache
-import q3_kotlin.popular_libraries.myapplication.model.room.db.Database
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitGithubSpecificUserRepo
 
 
 class UserDetailsFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
@@ -40,15 +34,10 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserView, BackButtonListener
 
     private val userDetailsPresenter: UserDetailsPresenter by moxyPresenter {
         UserDetailsPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubSpecificUserRepo(
-                ApiHolder.api,
-                AndroidNetworkStatus(App.instance),
-                RoomCurrentUserCache(Database.getInstance())
-            ),
             user
         ).apply {
             App.instance.appComponent.inject(this)
+            App.instance.appComponent
         }
     }
 

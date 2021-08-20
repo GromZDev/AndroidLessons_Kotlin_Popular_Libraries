@@ -2,7 +2,6 @@ package q3_kotlin.popular_libraries.myapplication.model.dao
 
 import androidx.room.*
 import q3_kotlin.popular_libraries.myapplication.model.room.RoomGithubRepository
-import q3_kotlin.popular_libraries.myapplication.model.room.RoomGithubUser
 
 @Dao
 interface RepositoryDao {

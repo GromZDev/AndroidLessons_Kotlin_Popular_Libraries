@@ -6,7 +6,7 @@ import q3_kotlin.popular_libraries.myapplication.presenter.MainPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UserDetailsPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.UsersPresenter
 import q3_kotlin.popular_libraries.myapplication.view.MainActivity
-import q3_kotlin.popular_libraries.myapplication.view.SpecificUserRVAdapter
+import q3_kotlin.popular_libraries.myapplication.view.UserDetailsFragment
 import q3_kotlin.popular_libraries.myapplication.view.UsersRVAdapter
 
 /** Тут мы перечисляем все модули, которые будем использовать
@@ -24,7 +24,8 @@ import q3_kotlin.popular_libraries.myapplication.view.UsersRVAdapter
         UsersRepoModule::class,
         CacheModule::class,
         DatabaseModule::class,
-        ImageLoaderModule::class
+        ImageLoaderModule::class,
+        SchedulerModule::class
     ]
 )
 interface AppComponent {
@@ -34,4 +35,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(userDetailsPresenter: UserDetailsPresenter)
     fun inject(usersRVAdapter: UsersRVAdapter)
+    fun inject(userDetailsFragment: UserDetailsFragment)
 }
