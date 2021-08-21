@@ -11,8 +11,5 @@ interface IDataSource {
     fun getUsers(): Single<List<GithubUser>>
 
     @GET
-//        ("/users/{username}")
-    fun getRepositories(
-//        @Path("username") userLogin: String,
-                        @Url url: String): Single<List<GithubSpecificUser>>
+    fun getRepositories(@Url url: String): Single<List<GithubSpecificUser>>
 }

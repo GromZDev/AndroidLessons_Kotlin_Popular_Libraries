@@ -1,8 +1,7 @@
 package q3_kotlin.popular_libraries.myapplication.model.room
 
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.Observable
-import java.util.*
+import io.reactivex.rxjava3.core.Single
 
 interface INetworkStatus {
     fun isOnline(): Observable<Boolean>
