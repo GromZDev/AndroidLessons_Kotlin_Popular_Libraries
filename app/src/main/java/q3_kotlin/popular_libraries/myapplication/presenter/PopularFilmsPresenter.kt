@@ -1,14 +1,16 @@
 package q3_kotlin.popular_libraries.myapplication.presenter
 
+import android.os.Bundle
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.Movie
 import q3_kotlin.popular_libraries.myapplication.model.PopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.navigation.PopularCurrentFilmScreen
+import q3_kotlin.popular_libraries.myapplication.view.PopularCurrentFilmFragment
 import q3_kotlin.popular_libraries.myapplication.view.PopularFilmsItemView
 import q3_kotlin.popular_libraries.myapplication.view.PopularFilmsView
-
 
 class PopularFilmsPresenter(
     private val uiScheduler: Scheduler,
@@ -68,9 +70,14 @@ class PopularFilmsPresenter(
 
         popularFilmsListPresenter.itemClickListener = { itemView ->
 
-            //TODO   Тут будет переход на экран конкретного фильма
+            val currentFilm = popularFilmsListPresenter.films[itemView.pos]
+            val bundle = Bundle()
+            bundle.putParcelable(PopularCurrentFilmFragment.BUNDLE_EXTRA, currentFilm)
+            router.navigateTo(PopularCurrentFilmScreen().create(bundle))
 
         }
+
+        viewState.updateList()
     }
 
     fun backPressed(): Boolean {
