@@ -8,7 +8,11 @@
     </style>
 
     <style name="ItemRounded">
-        <item name="cornerSize">10%</item>
+        <item name="cornerSize">15%</item>
+    </style>
+
+    <style name="ItemSpecificRounded">
+        <item name="cornerSize">6%</item>
     </style>
 
     <style name="FilmNameDescriptionFragment">

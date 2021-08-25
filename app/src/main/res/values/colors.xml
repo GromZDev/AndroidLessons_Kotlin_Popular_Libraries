@@ -10,4 +10,5 @@
     <color name="main_fragment_bg">#504A4A</color>
     <color name="item_rv_bg">#606060</color>
     <color name="detail_fragment_bg">#1C1C1C</color>
+    <color name="cast_stroke_color">#FFA12D</color>
 </resources>

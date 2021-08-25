@@ -6,4 +6,9 @@
     <string name="rating">Оценка:</string>
     <string name="film_rating_image">Film Rating Image</string>
     <string name="film_year_icon">Film Year Icon</string>
+    <string name="actor_image">Actor image</string>
+    <string name="actors">Actors</string>
+    <string name="ActorsClick">image_click</string>
+    <string name="showActors">Посмотреть актёров:</string>
+    <string name="in_role">в роли</string>
 </resources>

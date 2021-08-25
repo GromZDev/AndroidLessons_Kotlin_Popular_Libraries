@@ -28,6 +28,31 @@
         app:layout_constraintTop_toTopOf="@id/iw_popular_film_image"
         tools:text="Film Name" />
 
+    <TextView
+        android:id="@+id/tw_text_actors"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/showActors"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tw_popular_film_year"
+        app:layout_constraintTop_toTopOf="@+id/popular_film_year_image_description_fragment"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iw_cast_click"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/actors"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tw_text_actors"
+        app:layout_constraintEnd_toEndOf="@+id/tw_text_actors"
+        app:layout_constraintStart_toStartOf="@+id/tw_text_actors"
+        android:contentDescription="@string/ActorsClick" />
+
     <ImageView
         android:id="@+id/rating_popular_image_description_fragment"
         style="@style/FilmAttributesIconDescriptionFragment"
@@ -78,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="500dp"
-        android:layout_marginBottom="16dp"
+        android:scrollbarTrackVertical="@color/cast_stroke_color"
         android:scrollbars="vertical"
         android:textAlignment="center"
         android:textColor="@color/white"

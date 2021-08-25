@@ -2,24 +2,28 @@ package q3_kotlin.popular_libraries.myapplication.view
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.imageview.ShapeableImageView
 import moxy.MvpAppCompatFragment
+import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularCurrentFilmBinding
 import q3_kotlin.popular_libraries.myapplication.model.Movie
+import q3_kotlin.popular_libraries.myapplication.navigation.CastScreen
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 
 class PopularCurrentFilmFragment(
-    private val imageLoader: ImageLoader<ShapeableImageView> = GlideImageLoader()
+    private val imageLoader: ImageLoader<ShapeableImageView> = GlideImageLoader(),
 ) : MvpAppCompatFragment() {
 
     companion object {
         const val BUNDLE_EXTRA = "MY_Film"
         fun newInstance(bundle: Bundle): PopularCurrentFilmFragment {
             val fragment = PopularCurrentFilmFragment()
+            App.instance.router
             fragment.arguments = bundle
             return fragment
         }
@@ -44,7 +48,8 @@ class PopularCurrentFilmFragment(
         vb?.twPopularFilmName?.text = receivedMovie?.title
 
         vb?.twPopularFilmDescription?.text = receivedMovie?.overview
-
+        vb?.twPopularFilmDescription?.movementMethod = ScrollingMovementMethod()
+        
         vb?.iwPopularFilmImage?.let {
             imageLoader.loadInto(
                 "https://image.tmdb.org/t/p/w500/$imagePath",
@@ -63,6 +68,14 @@ class PopularCurrentFilmFragment(
         vb?.twPopularFilmYear?.text = receivedMovie?.releaseDate
 
         vb?.twPopularFilmTime?.text = receivedMovie?.popularity.toString()
+
+        vb?.iwCastClick?.setOnClickListener {
+            val router = App.instance.router
+
+            val bundle = Bundle()
+            bundle.putParcelable(CastFragment.BUNDLE_EXTRA, receivedMovie)
+            router.navigateTo(CastScreen.create(bundle))
+        }
 
     }
 
