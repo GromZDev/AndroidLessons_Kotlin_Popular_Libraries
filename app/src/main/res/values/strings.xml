@@ -11,4 +11,10 @@
     <string name="ActorsClick">image_click</string>
     <string name="showActors">Посмотреть актёров:</string>
     <string name="in_role">в роли</string>
+    <string name="film_rating_budget">Film Rating</string>
+    <string name="film_votes_image">Film Votes</string>
+    <string name="film_revenue_image">Film Revenue</string>
+    <string name="budget">бюджет $</string>
+    <string name="votes">голосов</string>
+    <string name="revenue">$ сборы</string>
 </resources>

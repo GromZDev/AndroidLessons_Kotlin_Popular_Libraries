@@ -8,7 +8,7 @@ import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.Movie
 import q3_kotlin.popular_libraries.myapplication.model.PopularFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.navigation.PopularCurrentFilmScreen
-import q3_kotlin.popular_libraries.myapplication.view.PopularCurrentFilmFragment
+import q3_kotlin.popular_libraries.myapplication.view.current.PopularCurrentFilmFragment
 import q3_kotlin.popular_libraries.myapplication.view.PopularFilmsItemView
 import q3_kotlin.popular_libraries.myapplication.view.PopularFilmsView
 

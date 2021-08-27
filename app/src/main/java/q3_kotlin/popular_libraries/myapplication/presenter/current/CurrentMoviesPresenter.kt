@@ -1,0 +1,5 @@
+package q3_kotlin.popular_libraries.myapplication.presenter.current
+
+import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmItemView
+
+interface CurrentMoviesPresenter : ICurrentPresenter<CurrentFilmItemView>
