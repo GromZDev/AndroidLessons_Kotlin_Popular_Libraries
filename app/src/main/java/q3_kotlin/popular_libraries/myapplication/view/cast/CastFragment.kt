@@ -1,4 +1,4 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.cast
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,10 @@ import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolderCast
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentCastBinding
-import q3_kotlin.popular_libraries.myapplication.presenter.CastPresenter
+import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitPopularFilmsCastRepo
+import q3_kotlin.popular_libraries.myapplication.retrofit.cast.RetrofitPopularFilmsCastRepo
+import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 
 class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
 

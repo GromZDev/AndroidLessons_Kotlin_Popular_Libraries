@@ -1,4 +1,6 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.cast
+
+import q3_kotlin.popular_libraries.myapplication.view.RVItemView
 
 interface CastItemView : RVItemView {
 

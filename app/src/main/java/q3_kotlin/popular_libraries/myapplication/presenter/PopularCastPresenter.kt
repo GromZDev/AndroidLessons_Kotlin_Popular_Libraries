@@ -1,5 +1,0 @@
-package q3_kotlin.popular_libraries.myapplication.presenter
-
-import q3_kotlin.popular_libraries.myapplication.view.CastItemView
-
-interface PopularCastPresenter : IListPresenter<CastItemView>

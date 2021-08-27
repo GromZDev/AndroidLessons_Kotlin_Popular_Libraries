@@ -1,4 +1,4 @@
-package q3_kotlin.popular_libraries.myapplication.model
+package q3_kotlin.popular_libraries.myapplication.model.popular
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

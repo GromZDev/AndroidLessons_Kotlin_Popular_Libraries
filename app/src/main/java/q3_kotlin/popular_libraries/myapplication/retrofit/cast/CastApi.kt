@@ -1,8 +1,8 @@
-package q3_kotlin.popular_libraries.myapplication.retrofit
+package q3_kotlin.popular_libraries.myapplication.retrofit.cast
 
 import io.reactivex.rxjava3.core.Single
 import q3_kotlin.popular_libraries.myapplication.BuildConfig
-import q3_kotlin.popular_libraries.myapplication.model.Credits
+import q3_kotlin.popular_libraries.myapplication.model.cast.Credits
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -4,7 +4,7 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
-import q3_kotlin.popular_libraries.myapplication.model.Movie
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovieRepo
 import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmItemView

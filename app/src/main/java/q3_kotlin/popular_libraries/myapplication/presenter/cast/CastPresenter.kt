@@ -1,14 +1,14 @@
-package q3_kotlin.popular_libraries.myapplication.presenter
+package q3_kotlin.popular_libraries.myapplication.presenter.cast
 
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
-import q3_kotlin.popular_libraries.myapplication.model.Cast
-import q3_kotlin.popular_libraries.myapplication.model.CastRepo
-import q3_kotlin.popular_libraries.myapplication.model.Movie
-import q3_kotlin.popular_libraries.myapplication.view.CastItemView
-import q3_kotlin.popular_libraries.myapplication.view.CastView
+import q3_kotlin.popular_libraries.myapplication.model.cast.Cast
+import q3_kotlin.popular_libraries.myapplication.model.cast.CastRepo
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
+import q3_kotlin.popular_libraries.myapplication.view.cast.CastItemView
+import q3_kotlin.popular_libraries.myapplication.view.cast.CastView
 
 class CastPresenter(
     private val uiScheduler: Scheduler,

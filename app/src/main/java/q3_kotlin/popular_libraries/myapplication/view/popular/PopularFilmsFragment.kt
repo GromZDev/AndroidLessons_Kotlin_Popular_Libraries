@@ -1,4 +1,4 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.popular
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,10 @@ import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularFilmsBinding
-import q3_kotlin.popular_libraries.myapplication.presenter.PopularFilmsPresenter
+import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularFilmsPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitPopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.retrofit.popular.RetrofitPopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 
 class PopularFilmsFragment : MvpAppCompatFragment(), PopularFilmsView, BackButtonListener {
 

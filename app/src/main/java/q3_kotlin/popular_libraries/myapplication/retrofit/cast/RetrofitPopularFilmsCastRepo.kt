@@ -1,10 +1,10 @@
-package q3_kotlin.popular_libraries.myapplication.retrofit
+package q3_kotlin.popular_libraries.myapplication.retrofit.cast
 
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import q3_kotlin.popular_libraries.myapplication.BuildConfig
-import q3_kotlin.popular_libraries.myapplication.model.CastRepo
-import q3_kotlin.popular_libraries.myapplication.model.Credits
+import q3_kotlin.popular_libraries.myapplication.model.cast.CastRepo
+import q3_kotlin.popular_libraries.myapplication.model.cast.Credits
 
 class RetrofitPopularFilmsCastRepo(
     private val api: CastApi

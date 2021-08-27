@@ -13,15 +13,15 @@ import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolderCurrentMovie
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularCurrentFilmBinding
-import q3_kotlin.popular_libraries.myapplication.model.Movie
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
 import q3_kotlin.popular_libraries.myapplication.navigation.CastScreen
 import q3_kotlin.popular_libraries.myapplication.presenter.current.CurrentFilmPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.RetrofitCurrentFilmRepo
+import q3_kotlin.popular_libraries.myapplication.retrofit.current.RetrofitCurrentFilmRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
-import q3_kotlin.popular_libraries.myapplication.view.CastFragment
+import q3_kotlin.popular_libraries.myapplication.view.cast.CastFragment
 
 class PopularCurrentFilmFragment(
     private val imageLoader: ImageLoader<ShapeableImageView> = GlideImageLoader(),

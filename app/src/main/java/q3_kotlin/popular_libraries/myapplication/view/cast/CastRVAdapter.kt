@@ -1,11 +1,11 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.cast
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemCastRvBinding
-import q3_kotlin.popular_libraries.myapplication.presenter.PopularCastPresenter
+import q3_kotlin.popular_libraries.myapplication.presenter.cast.PopularCastPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 
 class CastRVAdapter(

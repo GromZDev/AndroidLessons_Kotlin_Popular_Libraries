@@ -1,0 +1,5 @@
+package q3_kotlin.popular_libraries.myapplication.presenter.popular
+
+import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsItemView
+
+interface PopularMoviesListPresenter : IListPresenter<PopularFilmsItemView>
