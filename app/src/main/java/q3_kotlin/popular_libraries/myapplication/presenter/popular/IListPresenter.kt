@@ -1,4 +1,4 @@
-package q3_kotlin.popular_libraries.myapplication.presenter
+package q3_kotlin.popular_libraries.myapplication.presenter.popular
 
 import q3_kotlin.popular_libraries.myapplication.view.RVItemView
 

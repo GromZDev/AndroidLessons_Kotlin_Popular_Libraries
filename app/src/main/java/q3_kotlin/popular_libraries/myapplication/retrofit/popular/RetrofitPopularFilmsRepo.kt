@@ -1,10 +1,10 @@
-package q3_kotlin.popular_libraries.myapplication.retrofit
+package q3_kotlin.popular_libraries.myapplication.retrofit.popular
 
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import q3_kotlin.popular_libraries.myapplication.BuildConfig
-import q3_kotlin.popular_libraries.myapplication.model.GetMoviesResponse
-import q3_kotlin.popular_libraries.myapplication.model.PopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.model.popular.GetMoviesResponse
+import q3_kotlin.popular_libraries.myapplication.model.popular.PopularFilmsRepo
 
 class RetrofitPopularFilmsRepo(private val api: IDataSource) : PopularFilmsRepo {
 

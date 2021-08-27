@@ -1,11 +1,11 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.popular
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemPopularFilmsRvBinding
-import q3_kotlin.popular_libraries.myapplication.presenter.PopularMoviesListPresenter
+import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularMoviesListPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 
 class PopularFilmsRVAdapter(

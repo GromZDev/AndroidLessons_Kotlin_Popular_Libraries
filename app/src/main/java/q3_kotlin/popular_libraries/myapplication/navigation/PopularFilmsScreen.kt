@@ -1,7 +1,7 @@
 package q3_kotlin.popular_libraries.myapplication.navigation
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import q3_kotlin.popular_libraries.myapplication.view.PopularFilmsFragment
+import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsFragment
 
 object PopularFilmsScreen {
 

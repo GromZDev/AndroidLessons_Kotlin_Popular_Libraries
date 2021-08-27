@@ -28,6 +28,32 @@
         app:layout_constraintTop_toTopOf="@id/iw_popular_film_image"
         tools:text="Film Name" />
 
+    <TextView
+        android:id="@+id/tw_text_actors"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/showActors"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tw_popular_film_year"
+        app:layout_constraintTop_toTopOf="@+id/popular_film_year_image_description_fragment"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iw_cast_click"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/actors"
+        android:contentDescription="@string/ActorsClick"
+        app:layout_constraintEnd_toEndOf="@+id/tw_text_actors"
+        app:layout_constraintStart_toStartOf="@+id/tw_text_actors"
+        app:layout_constraintTop_toBottomOf="@+id/tw_text_actors" />
+
     <ImageView
         android:id="@+id/rating_popular_image_description_fragment"
         style="@style/FilmAttributesIconDescriptionFragment"
@@ -73,12 +99,91 @@
         app:layout_constraintTop_toTopOf="@id/popular_film_year_image_description_fragment"
         tools:text="Film Year" />
 
+    <ImageView
+        android:id="@+id/budget_image_film"
+        style="@style/FilmAttributesIconDescriptionFragment"
+        android:background="@drawable/ic_film_budget"
+        android:contentDescription="@string/film_rating_budget"
+        app:layout_constraintBottom_toTopOf="@+id/popular_film_year_image_description_fragment"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tw_popular_film_budget"
+        style="@style/FilmAttributesTextDescriptionFragment"
+        app:layout_constraintStart_toEndOf="@id/budget_image_film"
+        app:layout_constraintTop_toTopOf="@id/budget_image_film"
+        tools:text="Film Budget" />
+
+    <TextView
+        android:id="@+id/tw_budget"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/budget"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tw_popular_film_budget"
+        app:layout_constraintStart_toEndOf="@+id/tw_popular_film_budget" />
+
+    <ImageView
+        android:id="@+id/votes_image_film"
+        style="@style/FilmAttributesIconDescriptionFragment"
+        android:background="@drawable/ic_film_vote"
+        android:contentDescription="@string/film_votes_image"
+        app:layout_constraintBottom_toTopOf="@+id/budget_image_film"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tw_popular_film_votes"
+        style="@style/FilmAttributesTextDescriptionFragment"
+        app:layout_constraintStart_toEndOf="@id/votes_image_film"
+        app:layout_constraintTop_toTopOf="@id/votes_image_film"
+        tools:text="Film Votes" />
+
+    <TextView
+        android:id="@+id/tw_votes"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/votes"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/tw_popular_film_votes"
+        app:layout_constraintStart_toEndOf="@id/tw_popular_film_votes" />
+
+    <ImageView
+        android:id="@+id/revenue_image_film"
+        style="@style/FilmAttributesIconDescriptionFragment"
+        android:background="@drawable/ic_film_revenue"
+        android:contentDescription="@string/film_revenue_image"
+        app:layout_constraintBottom_toTopOf="@+id/votes_image_film"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tw_popular_film_revenue"
+        style="@style/FilmAttributesTextDescriptionFragment"
+        app:layout_constraintBottom_toBottomOf="@id/revenue_image_film"
+        app:layout_constraintStart_toEndOf="@id/revenue_image_film"
+        app:layout_constraintTop_toTopOf="@id/revenue_image_film"
+        tools:text="Film Revenue" />
+
+    <TextView
+        android:id="@+id/tw_revenue"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/revenue"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/tw_popular_film_revenue"
+        app:layout_constraintStart_toEndOf="@id/tw_popular_film_revenue" />
+
     <TextView
         android:id="@+id/tw_popular_film_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="500dp"
-        android:layout_marginBottom="16dp"
+        android:scrollbarTrackVertical="@color/cast_stroke_color"
         android:scrollbars="vertical"
         android:textAlignment="center"
         android:textColor="@color/white"

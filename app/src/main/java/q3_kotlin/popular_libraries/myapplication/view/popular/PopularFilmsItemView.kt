@@ -1,4 +1,6 @@
-package q3_kotlin.popular_libraries.myapplication.view
+package q3_kotlin.popular_libraries.myapplication.view.popular
+
+import q3_kotlin.popular_libraries.myapplication.view.RVItemView
 
 interface PopularFilmsItemView : RVItemView {
 

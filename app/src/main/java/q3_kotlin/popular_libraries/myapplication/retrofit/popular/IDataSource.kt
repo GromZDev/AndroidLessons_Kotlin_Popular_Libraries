@@ -1,7 +1,7 @@
-package q3_kotlin.popular_libraries.myapplication.retrofit
+package q3_kotlin.popular_libraries.myapplication.retrofit.popular
 
 import io.reactivex.rxjava3.core.Single
-import q3_kotlin.popular_libraries.myapplication.model.GetMoviesResponse
+import q3_kotlin.popular_libraries.myapplication.model.popular.GetMoviesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
