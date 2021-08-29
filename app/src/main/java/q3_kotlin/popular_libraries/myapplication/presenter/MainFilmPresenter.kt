@@ -2,7 +2,7 @@ package q3_kotlin.popular_libraries.myapplication.presenter
 
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
-import q3_kotlin.popular_libraries.myapplication.navigation.PopularFilmsScreen
+import q3_kotlin.popular_libraries.myapplication.navigation.ViewPagerScreen
 import q3_kotlin.popular_libraries.myapplication.view.MainView
 
 class MainFilmPresenter(private val router: Router) :
@@ -10,7 +10,7 @@ class MainFilmPresenter(private val router: Router) :
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        router.replaceScreen(PopularFilmsScreen.create())
+        router.replaceScreen(ViewPagerScreen.create())
     }
 
     fun backClicked() = router.exit()

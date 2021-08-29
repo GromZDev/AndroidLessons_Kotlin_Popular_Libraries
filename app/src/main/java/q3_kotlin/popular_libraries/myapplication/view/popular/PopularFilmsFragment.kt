@@ -17,10 +17,6 @@ import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 
 class PopularFilmsFragment : MvpAppCompatFragment(), PopularFilmsView, BackButtonListener {
 
-    companion object {
-        fun newInstance() = PopularFilmsFragment()
-    }
-
     private val presenter: PopularFilmsPresenter by moxyPresenter {
         PopularFilmsPresenter(
             AndroidSchedulers.mainThread(),

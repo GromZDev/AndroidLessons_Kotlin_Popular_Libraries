@@ -1,0 +1,5 @@
+package q3_kotlin.popular_libraries.myapplication.presenter.topRated
+
+import q3_kotlin.popular_libraries.myapplication.view.topRatedFilms.TopRatedFilmsItemView
+
+interface TopRatedMoviesListPresenter : TopRatedListPresenter<TopRatedFilmsItemView>

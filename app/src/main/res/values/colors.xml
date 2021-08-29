@@ -11,4 +11,6 @@
     <color name="item_rv_bg">#606060</color>
     <color name="detail_fragment_bg">#1C1C1C</color>
     <color name="cast_stroke_color">#FFA12D</color>
+    <color name="tab_color">#FFA12D</color>
+    <color name="text_counter_color">#2CED4C</color>
 </resources>

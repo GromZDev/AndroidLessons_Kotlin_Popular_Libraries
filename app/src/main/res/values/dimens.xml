@@ -8,4 +8,6 @@
 
     <dimen name="attributesTextFilmLayoutHeight">28dp</dimen>
 
+    <dimen name="tab_view_pager_indicator_height">4dp</dimen>
+
 </resources>

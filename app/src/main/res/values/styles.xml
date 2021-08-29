@@ -41,4 +41,16 @@
         <item name="android:layout_height">@dimen/attributesTextFilmLayoutHeight</item>
     </style>
 
+    <style name="My_ViewPager_Tab">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="tabGravity">center</item>
+        <item name="tabMode">scrollable</item>
+        <item name="android:background">@color/item_rv_bg</item>
+        <item name="tabRippleColor">@color/tab_color</item>
+        <item name="tabIndicatorColor">@color/tab_color</item>
+        <item name="tabIndicatorAnimationMode">linear</item>
+        <item name="tabIndicatorHeight">@dimen/tab_view_pager_indicator_height</item>
+    </style>
+
 </resources>
