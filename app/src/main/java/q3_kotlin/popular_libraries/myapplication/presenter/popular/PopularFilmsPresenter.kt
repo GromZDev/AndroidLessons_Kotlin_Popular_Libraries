@@ -11,12 +11,18 @@ import q3_kotlin.popular_libraries.myapplication.navigation.PopularCurrentFilmSc
 import q3_kotlin.popular_libraries.myapplication.view.current.PopularCurrentFilmFragment
 import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsItemView
 import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsView
+import javax.inject.Inject
 
-class PopularFilmsPresenter(
-    private val uiScheduler: Scheduler,
-    private val moviesRepo: PopularFilmsRepo,
-    private val router: Router
-) : MvpPresenter<PopularFilmsView>() {
+class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var moviesRepo: PopularFilmsRepo
 
     class PopularFilmsListPresenter : PopularMoviesListPresenter {
         val films = mutableListOf<Movie>()

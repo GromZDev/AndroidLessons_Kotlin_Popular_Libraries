@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
@@ -19,10 +18,11 @@ class TopRatedFilmsFragment : MvpAppCompatFragment(), TopRatedFilmsView, BackBut
 
     private val presenter: TopRatedFilmsPresenter by moxyPresenter {
         TopRatedFilmsPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitTopRatedFilmsRepo(ApiHolderTopRated.api),
-            App.instance.router
-        )
+            RetrofitTopRatedFilmsRepo(ApiHolderTopRated.api)
+        ).apply {
+            App.instance.appComponent.inject(this)
+            App.instance.appComponent
+        }
     }
 
     private var adapter: TopRatedFilmsRVAdapter? = null

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
@@ -14,8 +14,12 @@ import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.cast.RetrofitPopularFilmsCastRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
+import javax.inject.Inject
 
 class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
 
     companion object {
         const val BUNDLE_EXTRA = "MY_Cast"
@@ -28,11 +32,12 @@ class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
 
     private val castPresenter: CastPresenter by moxyPresenter {
         CastPresenter(
-            AndroidSchedulers.mainThread(),
             RetrofitPopularFilmsCastRepo(ApiHolderCast.api),
-            App.instance.router,
             arguments?.getParcelable(BUNDLE_EXTRA)!!
-        )
+        ).apply {
+            App.instance.appComponent.inject(this)
+            App.instance.appComponent
+        }
     }
 
     private var castAdapter: CastRVAdapter? = null

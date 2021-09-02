@@ -9,13 +9,18 @@ import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovieRepo
 import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmItemView
 import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmView
+import javax.inject.Inject
 
 class CurrentFilmPresenter(
-    private val uiScheduler: Scheduler,
     private val movieRepo: CurrentMovieRepo,
-    private val router: Router,
     private val movie: Movie
 ) : MvpPresenter<CurrentFilmView>() {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var router: Router
 
     class CurrentOneFilmPresenter : CurrentMoviesPresenter {
         val film = mutableListOf<CurrentMovie>()

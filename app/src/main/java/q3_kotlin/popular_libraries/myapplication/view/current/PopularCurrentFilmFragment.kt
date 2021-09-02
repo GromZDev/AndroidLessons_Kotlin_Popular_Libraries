@@ -6,15 +6,15 @@ import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.terrakok.cicerone.Router
 import com.google.android.material.imageview.ShapeableImageView
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolderCurrentMovie
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularCurrentFilmBinding
-import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.navigation.CastScreen
 import q3_kotlin.popular_libraries.myapplication.presenter.current.CurrentFilmPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
@@ -22,16 +22,21 @@ import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.current.RetrofitCurrentFilmRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastFragment
+import javax.inject.Inject
 
 class PopularCurrentFilmFragment(
     private val imageLoader: ImageLoader<ShapeableImageView> = GlideImageLoader(),
 ) : MvpAppCompatFragment(), CurrentFilmView, BackButtonListener {
 
+    @Inject
+    lateinit var router: Router
+
     companion object {
         const val BUNDLE_EXTRA = "MY_Film"
         fun newInstance(bundle: Bundle): PopularCurrentFilmFragment {
-            val fragment = PopularCurrentFilmFragment()
-            App.instance.router
+            val fragment = PopularCurrentFilmFragment().apply {
+                App.instance.appComponent.inject(this)
+            }
             fragment.arguments = bundle
             return fragment
         }
@@ -39,11 +44,11 @@ class PopularCurrentFilmFragment(
 
     private val presenter: CurrentFilmPresenter by moxyPresenter {
         CurrentFilmPresenter(
-            AndroidSchedulers.mainThread(),
             RetrofitCurrentFilmRepo(ApiHolderCurrentMovie.api),
-            App.instance.router,
             arguments?.getParcelable(BUNDLE_EXTRA)!!
-        )
+        ).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private var vb: FragmentPopularCurrentFilmBinding? = null
@@ -87,7 +92,7 @@ class PopularCurrentFilmFragment(
         vb?.twPopularFilmTime?.text = receivedMovie?.popularity.toString()
 
         vb?.iwCastClick?.setOnClickListener {
-            val router = App.instance.router
+            val router = router
 
             val bundle = Bundle()
             bundle.putParcelable(CastFragment.BUNDLE_EXTRA, receivedMovie)
