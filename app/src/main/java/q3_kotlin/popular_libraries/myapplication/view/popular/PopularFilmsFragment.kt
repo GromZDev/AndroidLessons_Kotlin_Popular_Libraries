@@ -9,7 +9,6 @@ import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularFilmsBinding
 import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularFilmsPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 
 class PopularFilmsFragment : MvpAppCompatFragment(), PopularFilmsView, BackButtonListener {
@@ -40,7 +39,10 @@ class PopularFilmsFragment : MvpAppCompatFragment(), PopularFilmsView, BackButto
 
     override fun init() {
         vb?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = PopularFilmsRVAdapter(presenter.popularFilmsListPresenter, GlideImageLoader())
+        adapter = PopularFilmsRVAdapter(presenter.popularFilmsListPresenter)
+            .apply {
+                App.instance.appComponent.inject(this)
+            }
         vb?.rvUsers?.adapter = adapter
     }
 

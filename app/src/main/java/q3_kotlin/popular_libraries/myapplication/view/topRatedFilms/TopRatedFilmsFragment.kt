@@ -10,7 +10,6 @@ import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolderTopRated
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentTopRatedFilmsBinding
 import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedFilmsPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.topRated.RetrofitTopRatedFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 
@@ -43,7 +42,10 @@ class TopRatedFilmsFragment : MvpAppCompatFragment(), TopRatedFilmsView, BackBut
 
     override fun init() {
         vb?.rvTopRated?.layoutManager = LinearLayoutManager(context)
-        adapter = TopRatedFilmsRVAdapter(presenter.topRatedListPresenter, GlideImageLoader())
+        adapter = TopRatedFilmsRVAdapter(presenter.topRatedListPresenter)
+            .apply {
+                App.instance.appComponent.inject(this)
+            }
         vb?.rvTopRated?.adapter = adapter
     }
 

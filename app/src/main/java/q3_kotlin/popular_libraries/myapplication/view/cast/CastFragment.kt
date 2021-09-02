@@ -11,7 +11,6 @@ import q3_kotlin.popular_libraries.myapplication.App
 import q3_kotlin.popular_libraries.myapplication.api.ApiHolderCast
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentCastBinding
 import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.cast.RetrofitPopularFilmsCastRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import javax.inject.Inject
@@ -60,7 +59,10 @@ class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
 
     override fun init() {
         vb?.rvCasts?.layoutManager = LinearLayoutManager(context)
-        castAdapter = CastRVAdapter(castPresenter.castListPresenter, GlideImageLoader())
+        castAdapter = CastRVAdapter(castPresenter.castListPresenter)
+            .apply {
+                App.instance.appComponent.inject(this)
+            }
         vb?.rvCasts?.adapter = castAdapter
     }
 

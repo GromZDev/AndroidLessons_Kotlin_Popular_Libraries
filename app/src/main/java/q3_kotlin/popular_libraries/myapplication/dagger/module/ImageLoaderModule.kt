@@ -10,7 +10,6 @@ import javax.inject.Singleton
 @Module
 class ImageLoaderModule {
 
-    @Singleton
     @Provides
     fun imageLoader(): ImageLoader<ShapeableImageView> =
         GlideImageLoader()

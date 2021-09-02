@@ -17,19 +17,19 @@ import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
 import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.navigation.CastScreen
 import q3_kotlin.popular_libraries.myapplication.presenter.current.CurrentFilmPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import q3_kotlin.popular_libraries.myapplication.retrofit.current.RetrofitCurrentFilmRepo
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastFragment
 import javax.inject.Inject
 
-class PopularCurrentFilmFragment(
-    private val imageLoader: ImageLoader<ShapeableImageView> = GlideImageLoader(),
-) : MvpAppCompatFragment(), CurrentFilmView, BackButtonListener {
+class PopularCurrentFilmFragment : MvpAppCompatFragment(), CurrentFilmView, BackButtonListener {
 
     @Inject
     lateinit var router: Router
+
+    @Inject
+    lateinit var imageLoader: ImageLoader<ShapeableImageView>
 
     companion object {
         const val BUNDLE_EXTRA = "MY_Film"
