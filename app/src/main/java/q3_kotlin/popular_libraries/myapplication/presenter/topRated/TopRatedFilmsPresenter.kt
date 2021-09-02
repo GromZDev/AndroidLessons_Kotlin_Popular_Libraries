@@ -1,4 +1,4 @@
-package q3_kotlin.popular_libraries.myapplication.presenter.popular
+package q3_kotlin.popular_libraries.myapplication.presenter.topRated
 
 import android.os.Bundle
 import com.github.terrakok.cicerone.Router
@@ -6,14 +6,16 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
-import q3_kotlin.popular_libraries.myapplication.model.popular.PopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.model.topRated.TopRatedFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.navigation.PopularCurrentFilmScreen
 import q3_kotlin.popular_libraries.myapplication.view.current.PopularCurrentFilmFragment
-import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsItemView
-import q3_kotlin.popular_libraries.myapplication.view.popular.PopularFilmsView
+import q3_kotlin.popular_libraries.myapplication.view.topRatedFilms.TopRatedFilmsItemView
+import q3_kotlin.popular_libraries.myapplication.view.topRatedFilms.TopRatedFilmsView
 import javax.inject.Inject
 
-class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
+class TopRatedFilmsPresenter(
+    private val topRatedMovies: TopRatedFilmsRepo
+) : MvpPresenter<TopRatedFilmsView>() {
 
     @Inject
     lateinit var uiScheduler: Scheduler
@@ -21,20 +23,17 @@ class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
     @Inject
     lateinit var router: Router
 
-    @Inject
-    lateinit var moviesRepo: PopularFilmsRepo
+    class TopRatedFilmsListPresenter : TopRatedMoviesListPresenter {
+        val topRatedFilms = mutableListOf<Movie>()
+        override var itemClickListener: ((TopRatedFilmsItemView) -> Unit)? = null
 
-    class PopularFilmsListPresenter : PopularMoviesListPresenter {
-        val films = mutableListOf<Movie>()
-        override var itemClickListener: ((PopularFilmsItemView) -> Unit)? = null
+        override fun getCount() = topRatedFilms.size
 
-        override fun getCount() = films.size
-
-        override fun bindView(view: PopularFilmsItemView) {
-            val movie = films[view.pos]
+        override fun bindView(view: TopRatedFilmsItemView) {
+            val movie = topRatedFilms[view.pos]
             val imagePath = "https://image.tmdb.org/t/p/w500/"
             movie.let {
-                view.setTitle(it.title.toString())
+                it.title?.let { it1 -> view.setTitle(it1) }
             }
             movie.let {
                 view.loadImage(imagePath + it.posterPath.toString())
@@ -51,7 +50,7 @@ class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
         }
     }
 
-    val popularFilmsListPresenter = PopularFilmsListPresenter()
+    val topRatedListPresenter = TopRatedFilmsListPresenter()
 
     private val disposable = CompositeDisposable()
 
@@ -62,11 +61,11 @@ class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
     }
 
     private fun loadData() {
-        val movies = moviesRepo.getPopularFilms()
+        val movies = topRatedMovies.getTopRatedFilms()
             .observeOn(uiScheduler)
             .subscribe({ repos ->
-                popularFilmsListPresenter.films.clear()
-                popularFilmsListPresenter.films.addAll(repos.movies)
+                topRatedListPresenter.topRatedFilms.clear()
+                topRatedListPresenter.topRatedFilms.addAll(repos.topRatedMovies)
                 viewState.updateList()
             }, {
                 println("Error: $it")
@@ -74,9 +73,9 @@ class PopularFilmsPresenter : MvpPresenter<PopularFilmsView>() {
 
         disposable.add(movies)
 
-        popularFilmsListPresenter.itemClickListener = { itemView ->
+        topRatedListPresenter.itemClickListener = { itemView ->
 
-            val currentFilm = popularFilmsListPresenter.films[itemView.pos]
+            val currentFilm = topRatedListPresenter.topRatedFilms[itemView.pos]
             val bundle = Bundle()
             bundle.putParcelable(PopularCurrentFilmFragment.BUNDLE_EXTRA, currentFilm)
             router.navigateTo(PopularCurrentFilmScreen().create(bundle))

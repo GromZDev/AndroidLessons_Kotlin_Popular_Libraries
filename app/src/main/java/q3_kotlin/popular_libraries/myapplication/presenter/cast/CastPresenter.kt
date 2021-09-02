@@ -9,13 +9,18 @@ import q3_kotlin.popular_libraries.myapplication.model.cast.CastRepo
 import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastItemView
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastView
+import javax.inject.Inject
 
 class CastPresenter(
-    private val uiScheduler: Scheduler,
     private val castRepo: CastRepo,
-    private val router: Router,
     private val movie: Movie
 ) : MvpPresenter<CastView>() {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var router: Router
 
     class CastListPresenter : PopularCastPresenter {
         val casts = mutableListOf<Cast>()

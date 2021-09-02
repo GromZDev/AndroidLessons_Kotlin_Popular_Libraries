@@ -7,12 +7,15 @@ import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemCastRvBinding
 import q3_kotlin.popular_libraries.myapplication.presenter.cast.PopularCastPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
+import javax.inject.Inject
 
 class CastRVAdapter(
-    private val presenter: PopularCastPresenter,
-    val imageLoader: ImageLoader<ShapeableImageView>
+    private val presenter: PopularCastPresenter
 ) :
     RecyclerView.Adapter<CastRVAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var imageLoader: ImageLoader<ShapeableImageView>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(

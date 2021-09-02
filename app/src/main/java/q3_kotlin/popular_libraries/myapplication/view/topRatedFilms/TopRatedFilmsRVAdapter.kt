@@ -1,18 +1,18 @@
-package q3_kotlin.popular_libraries.myapplication.view.popular
+package q3_kotlin.popular_libraries.myapplication.view.topRatedFilms
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemPopularFilmsRvBinding
-import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularMoviesListPresenter
+import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedMoviesListPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import javax.inject.Inject
 
-class PopularFilmsRVAdapter(
-    private val presenter: PopularMoviesListPresenter
+class TopRatedFilmsRVAdapter(
+    private val presenter: TopRatedMoviesListPresenter
 ) :
-    RecyclerView.Adapter<PopularFilmsRVAdapter.ViewHolder>() {
+    RecyclerView.Adapter<TopRatedFilmsRVAdapter.ViewHolder>() {
 
     @Inject
     lateinit var imageLoader: ImageLoader<ShapeableImageView>
@@ -35,7 +35,7 @@ class PopularFilmsRVAdapter(
         presenter.bindView(holder.apply { pos = position })
 
     inner class ViewHolder(private val vb: ItemPopularFilmsRvBinding) :
-        RecyclerView.ViewHolder(vb.root), PopularFilmsItemView {
+        RecyclerView.ViewHolder(vb.root), TopRatedFilmsItemView {
         override var pos = -1
 
         override fun setTitle(text: String) = with(vb) {

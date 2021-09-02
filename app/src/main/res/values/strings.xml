@@ -17,4 +17,6 @@
     <string name="budget">бюджет $</string>
     <string name="votes">голосов</string>
     <string name="revenue">$ сборы</string>
+    <string name="popular">Популярное</string>
+    <string name="TopRated">Высокооценённые</string>
 </resources>
