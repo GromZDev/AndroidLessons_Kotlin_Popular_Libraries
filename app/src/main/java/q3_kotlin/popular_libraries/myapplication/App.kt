@@ -3,22 +3,30 @@ package q3_kotlin.popular_libraries.myapplication
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
+import q3_kotlin.popular_libraries.myapplication.dagger.DaggerApplicationComponent
 
-class App: Application() {
-    companion object {
-        lateinit var instance: App
-    }
+class App: DaggerApplication() {
 
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-    val router get() = cicerone.router
+    override fun applicationInjector(): AndroidInjector<App> =
+        DaggerApplicationComponent
+            .builder()
+            .withContext(applicationContext)
+            .apply {
+                val cicerone = Cicerone.create()
+                val schedulers: Scheduler = AndroidSchedulers.mainThread()
+                withNavigationHolder(cicerone.getNavigatorHolder())
+                withRouter(cicerone.router)
+                withSchedulers(schedulers)
+            }
+            .build()
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        RxJavaPlugins.setErrorHandler {  }
     }
-
 }

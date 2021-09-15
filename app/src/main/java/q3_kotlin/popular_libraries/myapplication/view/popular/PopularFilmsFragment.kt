@@ -4,24 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import moxy.MvpAppCompatFragment
+import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.ktx.moxyPresenter
-import q3_kotlin.popular_libraries.myapplication.App
-import q3_kotlin.popular_libraries.myapplication.api.ApiHolder
+import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularFilmsBinding
+import q3_kotlin.popular_libraries.myapplication.model.popular.PopularFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularFilmsPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.popular.RetrofitPopularFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
+import javax.inject.Inject
 
-class PopularFilmsFragment : MvpAppCompatFragment(), PopularFilmsView, BackButtonListener {
+class PopularFilmsFragment : AbsFragment(R.layout.fragment_popular_films), PopularFilmsView,
+    BackButtonListener {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var schedulers: Scheduler
+
+    @Inject
+    lateinit var moviesRepo: PopularFilmsRepo
 
     private val presenter: PopularFilmsPresenter by moxyPresenter {
         PopularFilmsPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitPopularFilmsRepo(ApiHolder.api),
-            App.instance.router
+            uiScheduler = schedulers,
+            moviesRepo = moviesRepo,
+            router = router
         )
     }
 

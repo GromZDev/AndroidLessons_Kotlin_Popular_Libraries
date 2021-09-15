@@ -4,24 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import moxy.MvpAppCompatFragment
+import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.ktx.moxyPresenter
-import q3_kotlin.popular_libraries.myapplication.App
-import q3_kotlin.popular_libraries.myapplication.api.ApiHolderTopRated
+import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentTopRatedFilmsBinding
+import q3_kotlin.popular_libraries.myapplication.model.topRated.TopRatedFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedFilmsPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.topRated.RetrofitTopRatedFilmsRepo
+import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
+import javax.inject.Inject
 
-class TopRatedFilmsFragment : MvpAppCompatFragment(), TopRatedFilmsView, BackButtonListener {
+class TopRatedFilmsFragment : AbsFragment(R.layout.fragment_top_rated_films), TopRatedFilmsView,
+    BackButtonListener {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var schedulers: Scheduler
+
+    @Inject
+    lateinit var topRatedMovies: TopRatedFilmsRepo
 
     private val presenter: TopRatedFilmsPresenter by moxyPresenter {
         TopRatedFilmsPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitTopRatedFilmsRepo(ApiHolderTopRated.api),
-            App.instance.router
+            uiScheduler = schedulers,
+            topRatedMovies = topRatedMovies,
+            router = router
         )
     }
 

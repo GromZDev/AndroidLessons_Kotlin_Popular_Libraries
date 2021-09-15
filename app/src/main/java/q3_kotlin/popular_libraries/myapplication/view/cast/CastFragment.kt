@@ -4,18 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import moxy.MvpAppCompatFragment
+import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.ktx.moxyPresenter
-import q3_kotlin.popular_libraries.myapplication.App
-import q3_kotlin.popular_libraries.myapplication.api.ApiHolderCast
+import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentCastBinding
+import q3_kotlin.popular_libraries.myapplication.model.cast.CastRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
-import q3_kotlin.popular_libraries.myapplication.retrofit.cast.RetrofitPopularFilmsCastRepo
+import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
+import javax.inject.Inject
 
-class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
+class CastFragment : AbsFragment(R.layout.fragment_cast), CastView, BackButtonListener {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var schedulers: Scheduler
+
+    @Inject
+    lateinit var castRepo: CastRepo
 
     companion object {
         const val BUNDLE_EXTRA = "MY_Cast"
@@ -28,9 +38,9 @@ class CastFragment : MvpAppCompatFragment(), CastView, BackButtonListener {
 
     private val castPresenter: CastPresenter by moxyPresenter {
         CastPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitPopularFilmsCastRepo(ApiHolderCast.api),
-            App.instance.router,
+            uiScheduler = schedulers,
+            castRepo = castRepo,
+            router = router,
             arguments?.getParcelable(BUNDLE_EXTRA)!!
         )
     }
