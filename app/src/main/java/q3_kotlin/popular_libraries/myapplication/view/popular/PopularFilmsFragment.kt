@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.Router
+import com.google.android.material.imageview.ShapeableImageView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentPopularFilmsBinding
 import q3_kotlin.popular_libraries.myapplication.model.popular.PopularFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.popular.PopularFilmsPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
+import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import javax.inject.Inject
@@ -27,6 +28,9 @@ class PopularFilmsFragment : AbsFragment(R.layout.fragment_popular_films), Popul
 
     @Inject
     lateinit var moviesRepo: PopularFilmsRepo
+
+    @Inject
+    lateinit var imageLoader: ImageLoader<ShapeableImageView>
 
     private val presenter: PopularFilmsPresenter by moxyPresenter {
         PopularFilmsPresenter(
@@ -54,7 +58,7 @@ class PopularFilmsFragment : AbsFragment(R.layout.fragment_popular_films), Popul
 
     override fun init() {
         vb?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = PopularFilmsRVAdapter(presenter.popularFilmsListPresenter, GlideImageLoader())
+        adapter = PopularFilmsRVAdapter(presenter.popularFilmsListPresenter, imageLoader)
         vb?.rvUsers?.adapter = adapter
     }
 

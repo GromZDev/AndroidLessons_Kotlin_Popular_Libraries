@@ -7,10 +7,11 @@ import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemPopularFilmsRvBinding
 import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedMoviesListPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
+import javax.inject.Inject
 
-class TopRatedFilmsRVAdapter(
-    private val presenter: TopRatedMoviesListPresenter, val imageLoader:
-    ImageLoader<ShapeableImageView>
+class TopRatedFilmsRVAdapter @Inject constructor(
+    private val presenter: TopRatedMoviesListPresenter,
+    val imageLoader: ImageLoader<ShapeableImageView>
 ) :
     RecyclerView.Adapter<TopRatedFilmsRVAdapter.ViewHolder>() {
 

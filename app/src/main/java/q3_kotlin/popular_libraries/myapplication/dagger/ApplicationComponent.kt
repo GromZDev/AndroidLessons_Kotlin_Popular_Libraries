@@ -14,6 +14,7 @@ import q3_kotlin.popular_libraries.myapplication.dagger.module.cast.ApiCastModul
 import q3_kotlin.popular_libraries.myapplication.dagger.module.cast.CastFilmsModule
 import q3_kotlin.popular_libraries.myapplication.dagger.module.current.ApiCurrentModule
 import q3_kotlin.popular_libraries.myapplication.dagger.module.current.CurrentFilmsModule
+import q3_kotlin.popular_libraries.myapplication.dagger.module.imageLoader.ImageLoaderModule
 import q3_kotlin.popular_libraries.myapplication.dagger.module.popular.ApiModule
 import q3_kotlin.popular_libraries.myapplication.dagger.module.popular.PopularFilmsModule
 import q3_kotlin.popular_libraries.myapplication.dagger.module.topRated.ApiTopRatedModule
@@ -34,7 +35,8 @@ import javax.inject.Singleton
         ApiCurrentModule::class,
         CurrentFilmsModule::class,
         ApiCastModule::class,
-        CastFilmsModule::class
+        CastFilmsModule::class,
+        ImageLoaderModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<App> {

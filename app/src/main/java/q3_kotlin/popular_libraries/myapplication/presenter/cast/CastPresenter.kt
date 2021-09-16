@@ -1,6 +1,8 @@
 package q3_kotlin.popular_libraries.myapplication.presenter.cast
 
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
@@ -10,11 +12,11 @@ import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastItemView
 import q3_kotlin.popular_libraries.myapplication.view.cast.CastView
 
-class CastPresenter(
+class CastPresenter @AssistedInject constructor(
     private val uiScheduler: Scheduler,
     private val castRepo: CastRepo,
     private val router: Router,
-    private val movie: Movie
+    @Assisted private val movie: Movie
 ) : MvpPresenter<CastView>() {
 
     class CastListPresenter : PopularCastPresenter {

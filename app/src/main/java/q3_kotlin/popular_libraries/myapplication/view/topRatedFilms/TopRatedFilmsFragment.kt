@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.Router
+import com.google.android.material.imageview.ShapeableImageView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentTopRatedFilmsBinding
 import q3_kotlin.popular_libraries.myapplication.model.topRated.TopRatedFilmsRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedFilmsPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
+import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import javax.inject.Inject
@@ -27,6 +28,9 @@ class TopRatedFilmsFragment : AbsFragment(R.layout.fragment_top_rated_films), To
 
     @Inject
     lateinit var topRatedMovies: TopRatedFilmsRepo
+
+    @Inject
+    lateinit var imageLoader: ImageLoader<ShapeableImageView>
 
     private val presenter: TopRatedFilmsPresenter by moxyPresenter {
         TopRatedFilmsPresenter(
@@ -54,7 +58,7 @@ class TopRatedFilmsFragment : AbsFragment(R.layout.fragment_top_rated_films), To
 
     override fun init() {
         vb?.rvTopRated?.layoutManager = LinearLayoutManager(context)
-        adapter = TopRatedFilmsRVAdapter(presenter.topRatedListPresenter, GlideImageLoader())
+        adapter = TopRatedFilmsRVAdapter(presenter.topRatedListPresenter, imageLoader)
         vb?.rvTopRated?.adapter = adapter
     }
 

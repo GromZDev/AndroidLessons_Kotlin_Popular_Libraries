@@ -1,20 +1,22 @@
 package q3_kotlin.popular_libraries.myapplication.presenter.current
 
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
-import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovie
 import q3_kotlin.popular_libraries.myapplication.model.current.CurrentMovieRepo
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
 import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmItemView
 import q3_kotlin.popular_libraries.myapplication.view.current.CurrentFilmView
 
-class CurrentFilmPresenter(
+class CurrentFilmPresenter @AssistedInject constructor(
     private val uiScheduler: Scheduler,
     private val movieRepo: CurrentMovieRepo,
     private val router: Router,
-    private val movie: Movie
+    @Assisted private val movie: Movie
 ) : MvpPresenter<CurrentFilmView>() {
 
     class CurrentOneFilmPresenter : CurrentMoviesPresenter {

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.core.Scheduler
+import com.google.android.material.imageview.ShapeableImageView
 import moxy.ktx.moxyPresenter
 import q3_kotlin.popular_libraries.myapplication.R
 import q3_kotlin.popular_libraries.myapplication.databinding.FragmentCastBinding
-import q3_kotlin.popular_libraries.myapplication.model.cast.CastRepo
 import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenter
-import q3_kotlin.popular_libraries.myapplication.retrofit.GlideImageLoader
+import q3_kotlin.popular_libraries.myapplication.presenter.cast.CastPresenterFactory
+import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import q3_kotlin.popular_libraries.myapplication.view.AbsFragment
 import q3_kotlin.popular_libraries.myapplication.view.BackButtonListener
 import javax.inject.Inject
@@ -19,13 +18,10 @@ import javax.inject.Inject
 class CastFragment : AbsFragment(R.layout.fragment_cast), CastView, BackButtonListener {
 
     @Inject
-    lateinit var router: Router
+    lateinit var castPresenterFactory: CastPresenterFactory
 
     @Inject
-    lateinit var schedulers: Scheduler
-
-    @Inject
-    lateinit var castRepo: CastRepo
+    lateinit var imageLoader: ImageLoader<ShapeableImageView>
 
     companion object {
         const val BUNDLE_EXTRA = "MY_Cast"
@@ -37,12 +33,7 @@ class CastFragment : AbsFragment(R.layout.fragment_cast), CastView, BackButtonLi
     }
 
     private val castPresenter: CastPresenter by moxyPresenter {
-        CastPresenter(
-            uiScheduler = schedulers,
-            castRepo = castRepo,
-            router = router,
-            arguments?.getParcelable(BUNDLE_EXTRA)!!
-        )
+        castPresenterFactory.create(arguments?.getParcelable(BUNDLE_EXTRA))
     }
 
     private var castAdapter: CastRVAdapter? = null
@@ -65,7 +56,7 @@ class CastFragment : AbsFragment(R.layout.fragment_cast), CastView, BackButtonLi
 
     override fun init() {
         vb?.rvCasts?.layoutManager = LinearLayoutManager(context)
-        castAdapter = CastRVAdapter(castPresenter.castListPresenter, GlideImageLoader())
+        castAdapter = CastRVAdapter(castPresenter.castListPresenter, imageLoader)
         vb?.rvCasts?.adapter = castAdapter
     }
 
