@@ -13,4 +13,5 @@
     <color name="cast_stroke_color">#FFA12D</color>
     <color name="tab_color">#FFA12D</color>
     <color name="text_counter_color">#2CED4C</color>
+    <color name="alfa_main_bg">#400D0D0D</color>
 </resources>

@@ -10,8 +10,8 @@ class RetrofitTopRatedFilmsRepo(private val api: TopRatedMovieApi) : TopRatedFil
 
     private val key: String = BuildConfig.FILM_API_KEY
 
-    override fun getTopRatedFilms(): Single<TopRatedResponse> =
-        api.getTopRatedMovies(key, "ru", 1)
+    override fun getTopRatedFilms(page: Int): Single<TopRatedResponse> =
+        api.getTopRatedMovies(key, "ru", page)
             .subscribeOn(Schedulers.io())
 
 }

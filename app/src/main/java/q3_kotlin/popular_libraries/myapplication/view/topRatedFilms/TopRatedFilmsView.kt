@@ -8,4 +8,5 @@ import moxy.viewstate.strategy.StateStrategyType
 interface TopRatedFilmsView : MvpView {
     fun init()
     fun updateList()
+    fun loadNewMovies(page: Int)
 }

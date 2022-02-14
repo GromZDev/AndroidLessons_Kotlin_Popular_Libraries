@@ -14,7 +14,8 @@ import q3_kotlin.popular_libraries.myapplication.view.topRatedFilms.TopRatedFilm
 import javax.inject.Inject
 
 class TopRatedFilmsPresenter(
-    private val topRatedMovies: TopRatedFilmsRepo
+    private val topRatedMovies: TopRatedFilmsRepo,
+    private val page: Int
 ) : MvpPresenter<TopRatedFilmsView>() {
 
     @Inject
@@ -22,6 +23,8 @@ class TopRatedFilmsPresenter(
 
     @Inject
     lateinit var router: Router
+
+    var itemsAdded: Int = 0
 
     class TopRatedFilmsListPresenter : TopRatedMoviesListPresenter {
         val topRatedFilms = mutableListOf<Movie>()
@@ -57,15 +60,15 @@ class TopRatedFilmsPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadData()
+        loadData(page)
     }
 
-    private fun loadData() {
-        val movies = topRatedMovies.getTopRatedFilms()
+    fun loadData(page: Int) {
+        val movies = topRatedMovies.getTopRatedFilms(page)
             .observeOn(uiScheduler)
             .subscribe({ repos ->
-                topRatedListPresenter.topRatedFilms.clear()
                 topRatedListPresenter.topRatedFilms.addAll(repos.topRatedMovies)
+                itemsAdded = repos.topRatedMovies.size - 1
                 viewState.updateList()
             }, {
                 println("Error: $it")
@@ -74,15 +77,12 @@ class TopRatedFilmsPresenter(
         disposable.add(movies)
 
         topRatedListPresenter.itemClickListener = { itemView ->
-
             val currentFilm = topRatedListPresenter.topRatedFilms[itemView.pos]
             val bundle = Bundle()
             bundle.putParcelable(PopularCurrentFilmFragment.BUNDLE_EXTRA, currentFilm)
             router.navigateTo(PopularCurrentFilmScreen().create(bundle))
-
         }
-
-        viewState.updateList()
+        //  viewState.updateList()
     }
 
     fun backPressed(): Boolean {

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import q3_kotlin.popular_libraries.myapplication.databinding.ItemPopularFilmsRvBinding
+import q3_kotlin.popular_libraries.myapplication.model.popular.Movie
+import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedFilmsPresenter
 import q3_kotlin.popular_libraries.myapplication.presenter.topRated.TopRatedMoviesListPresenter
 import q3_kotlin.popular_libraries.myapplication.retrofit.ImageLoader
 import javax.inject.Inject
@@ -28,6 +30,11 @@ class TopRatedFilmsRVAdapter(
                 presenter.itemClickListener?.invoke(this)
             }
         }
+
+    fun appendMovies(movies: List<Movie>) {
+        val listPresenter = TopRatedFilmsPresenter.TopRatedFilmsListPresenter()
+        listPresenter.topRatedFilms.addAll(movies)
+    }
 
     override fun getItemCount() = presenter.getCount()
 
